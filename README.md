@@ -29,7 +29,7 @@ let userList = makefake({
   _content: {
     "name": {
       _type: 'string',
-      _source: FakeNames
+      _source: makefake.nameSurname
     },
     "profilePicture": {
       _type: 'photo'
