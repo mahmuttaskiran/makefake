@@ -6,9 +6,13 @@ Create data for test, design and other development processes needs data to conti
   - [Example use case](#example-use-case)
   - [Features](#features)
   - [Documentation](#documentation)
-    - [Data types](#data-types)
     - [String](#string)
     - [Number](#number)
+    - [Boolean](#boolean)
+    - [Array](#array)
+    - [Object](#object)
+    - [Color](#color)
+    - [Photo](#photo)
 
 ## Installation
 ```
@@ -240,7 +244,30 @@ makefake({
 }) // Result (Random) { year: 2014, brand: 'BMW', price: 52737, isExpensive: true }
 ```
 
+### Color
+Arguments: **_hue**: color, **_luminosity**: color, **_format**: string, **_alpha**: number<br>
+[See Random Color Documentation](https://github.com/davidmerfield/randomColor)
+```javascript
+makefake({
+  _type: 'color',
+  _hue: 'blue',
+  _format: 'rgb',
+}) // Result (Random): rgb(163, 162, 242)
+```
+
+### Photo
+Arguments: **_width**: color, **_height**: color, **_format**: string, **_alpha**: number<br>
+https://picsum.photos/
+```javascript
+makefake({
+  _type: 'photo',
+  _width: 500,
+  _height: 500
+}) // Result (Random): https://picsum.photos/400/400/?key=0.47288896556640103&random
+```
+
 ### License
+```
 Copyright 2019 Mahmut Taşkıran
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -248,3 +275,4 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
