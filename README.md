@@ -61,45 +61,56 @@ It's just a simple use case. Let's see Features and Documentation to understand 
 
 ## Features
 **Random data creating**<br>
-MakeFake can create any primitive and non-primitive data just like array or object randomly that contains other primitive or non-primitive data types.<br><br>
+MakeFake can create any primitive and non-primitive data just like array or object randomly that contains other primitive or non-primitive data types.<br>
 **Basic data structure**<br>
-Define your data structure as same result object.<br><br>
+Define your data structure as same result object.<br>
 **Custom data formatting**<br>
-MakeFake allows intervention to editing data during creating.
-
+MakeFake allows intervention to editing data during creating.<br>
 
 ## Documentation
 ### Data types
 ### String 
+Arguments: _source, _charset, _source, _formatter
 ```javascript
 let namesArray = ["Mahmut", "Brain", "Elizabeth"];
-
 makefake({
   _type: 'string',
   _source: namesArray
-}) /* Result is one of namesArray item. */
+}) 
+// Result:  "Mahmut"
 
 makefake({
   _type: 'string',
   _length: 10,
   _charset: 'a-z'
-}) /* Result is just like that: "qwekjaskdj" */
+}) 
+// Result: "qwekjaskdj" 
 
-/* You can set _character to 'a-Z', 'A-Z', '0-9', 'Symbol' */
-/* You can set _character to custom characters just like "abcd1234". */
-/* You can set _character to custom char code range just like that */
+// You can set _character to 'a-Z', 'A-Z', '0-9', 'Symbol' 
+// You can set _character to custom characters just like "abcd1234". 
 
+// You can set _character to custom char code range just like that.
 makefake({
   _type: 'string',
-  _length: 20,
+  _length: 5,
   _charset: [48, 57]
 })
+// Result: 34512
 
-/* Or you can set multiple character sets just like that */
+// Or you can set multiple character sets just like that 
 makefake({
   _type: 'string',
   _length: 20,
   _charset: ["customcharacters1234", 'a-Z', [48, 57]]
 })
 
+// use _formatter to edit produced data from MakeFake
+makefake({
+  _type: 'string',
+  _source: ''
+})
+
 ```
+
+### Number
+Arguments: _max, _min, _float, _index, _formatter
