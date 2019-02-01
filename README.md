@@ -1,13 +1,21 @@
 # MakeFake
-Make easier to create data for test, design and other development process need data to continue fast.
+Create data for test, design and other development processes needs data to continue fast.
 
-#### Installation
+##### Table of Contents
+1. [Installation](#installation-instructions)<br>
+2. [Example use case](#usage-instructions)<br>
+3. [Features](#troubleshooting)<br>
+4. [Documentation](#compatibility)<br>
+. [Data types](#notes-and-miscellaneous)<br>
+. [Understanding _formatter](#building-the-extension-bundles)<br>
+. [Understanding content](#next-steps)<br>
 
+### Installation
 ```
 npm install makefake
 ```
-
-Let's assume you have a design just like that and you wanna create ListView for this. But you dont have data currently. You just devoloping frontend.
+### Example use case
+Let's assume you have a design just like that and you wanna create ListView for this. But you don't have data currently. You just developing frontend.
 
 ![N|DesignExample](https://raw.githubusercontent.com/mahmuttaskiran/makefake/master/images/p1.png)
 ```javascript
@@ -34,7 +42,7 @@ let userList = makefake({
   }
 });
 ```
-This codes produces an array contain one hundred different user object just like that.
+This codes produces an array contain one hundred different user object just like that:
 ```json
 [
   {
@@ -51,3 +59,4 @@ This codes produces an array contain one hundred different user object just like
   }
 ];
 ```
+It's just a simple use case. Let's see Features and Documentation to understand what you can do with this library.
