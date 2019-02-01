@@ -40,7 +40,7 @@ let userList = makefake({
     },
     "username": {
       _type: 'string',
-      _source: FakeUserNames,
+      _source: makefake.username,
       _formatter: (data) => '@' + data
     }
   }
