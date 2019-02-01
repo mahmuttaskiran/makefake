@@ -259,7 +259,7 @@ makefake({
 ```
 
 ### Photo
-Arguments: **_width**: color, **_height**: color, **_format**: string, **_alpha**: number<br>
+Arguments: **_width**: color, **_height**: color<br>
 https://picsum.photos/
 ```javascript
 makefake({
