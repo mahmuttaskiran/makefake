@@ -1,4 +1,5 @@
 const makefake = require('../../index');
+const FakeLanguages = require('../fakesources/FakeLanguages');
 
 it('random string generator with default params', function () {
   var fakeString = makefake({
@@ -84,4 +85,12 @@ it('test with _source', function () {
     _source: names
   });
   expect(fakeString).toMatch(/Mahmut Taşkıran|Ali Taşkıran|Sakine Taşkıran/g);
+});
+
+it('should return languages', function () {
+  var lang = makefake({
+    _type: 'string',
+    _source: FakeLanguages
+  });
+  expect(FakeLanguages).toContain(lang);
 });
