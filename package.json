@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/mahmuttaskiran/MakeFake/issues"
   },
+  "dependencies": {
+    "randomcolor": "^0.5.3"
+  },
   "homepage": "https://github.com/mahmuttaskiran/MakeFake#readme",
   "devDependencies": {
     "jest": "^24.0.0",
