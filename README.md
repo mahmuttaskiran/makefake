@@ -19,7 +19,7 @@ Create data for test, design and other development processes needs data to conti
 npm install makefake
 ```
 ## Example use case
-Let's assume you have a design just like that and you wanna create ListView for this. But you don't have data currently. You just developing frontend.
+Let's assume you have a design like below and you wanna create ListView for this. But you don't have data currently. You just developing frontend.
 
 ![N|DesignExample](https://raw.githubusercontent.com/mahmuttaskiran/makefake/master/images/p1.png)
 ```javascript
