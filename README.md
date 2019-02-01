@@ -1,14 +1,11 @@
 # MakeFake
 Create data for test, design and other development processes needs data to continue fast.
 
-##### Table of Contents
-1. [Installation](#installation-instructions)<br>
-2. [Example use case](#usage-instructions)<br>
-3. [Features](#troubleshooting)<br>
-4. [Documentation](#compatibility)<br>
-. [Data types](#notes-and-miscellaneous)<br>
-. [Understanding _formatter](#building-the-extension-bundles)<br>
-. [Understanding content](#next-steps)<br>
+### Table of Contents
+1. [Installation](#installation)<br>
+2. [Example use case](#example-use-case)<br>
+3. [Features](#features)<br>
+4. [Documentation](#documentation)<br>
 
 ### Installation
 ```
@@ -57,6 +54,34 @@ This codes produces an array contain one hundred different user object just like
     isOnline: false,
     username: "@apacheemm"
   }
+  ...
 ];
 ```
 It's just a simple use case. Let's see Features and Documentation to understand what you can do with this library.
+
+### Features
+**Random data creating**<br>
+MakeFake can create any primitive and non-primitive data just like array or object randomly that contains other primitive or non-primitive data types.<br><br>
+**Basic data structure**<br>
+Define your data structure as same result object.<br><br>
+**Custom data formatting**<br>
+MakeFake allows intervention to editing data during creating.
+
+
+### Documentation
+#### Data types
+#### "string"
+
+**Arguments**<br>
+**_source:** *array* <br>
+Returns a random string in this array<br>
+**_length:** *number*<br>
+String length. This argument ignored if you defined a  **_source.** <br>
+**_charset:** *array || string*<br>
+It's can be a string contains characters you want to use when creating random string. Just like: "abcd1234" <br>
+**'a-z'** for lowercase characters in alphabet.<br>
+**'A-Z'** for uppercase characters in alphabet.<br>
+**'a-Z'** for uppercase or lowercase characters in alphabet.<br>
+**'0-9'** for numbers.<br>
+**'Symbol'** for symbols.<br>
+**array** You can set an array for _charset
