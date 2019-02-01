@@ -4,7 +4,7 @@
   "description": "Make easier to create data for test, design and other development process need data to continue fast.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,17 @@
   },
   "homepage": "https://github.com/mahmuttaskiran/MakeFake#readme",
   "devDependencies": {
-    "jest": "^24.0.0"
+    "jest": "^24.0.0",
+    "prettier": "1.16.3"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
   }
 }
