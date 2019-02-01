@@ -1,5 +1,6 @@
 const makefake = require('../../index');
 const FakeLanguages = require('../fakesources/FakeLanguages');
+const FakeParagraphs = require('../fakesources/FakeParagraphs');
 
 it('random string generator with default params', function () {
   var fakeString = makefake({
@@ -93,4 +94,13 @@ it('should return languages', function () {
     _source: FakeLanguages
   });
   expect(FakeLanguages).toContain(lang);
+});
+
+it('should return paragraph', function () {
+  var p = makefake({
+    _type: 'string',
+    _source: FakeParagraphs
+  });
+  expect(FakeParagraphs).toContain(p);
+  console.log(p);
 });
