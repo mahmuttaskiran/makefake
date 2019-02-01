@@ -24,4 +24,11 @@ function makefake(dataStructure) {
   return produce(dataStructure, createContext());
 }
 
+makefake.nameSurname = require("./src/fakesources/FakeUserNames");
+makefake.username = require("./src/fakesources/FakeUserNames");
+makefake.word = require("./src/fakesources/FakeEnglishWords");
+makefake.langueage = require("./src/fakesources/FakeLanguages");
+makefake.paragraph = require("./src/fakesources/FakeParagraphs");
+makefake.sentence = require("./src/fakesources/FakeSentences");
+
 module.exports = makefake;
