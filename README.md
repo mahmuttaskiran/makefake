@@ -2,8 +2,6 @@
 Create data for test, design and other development processes needs data to continue fast.
 
 ## Table of Contents
-
-  - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Example use case](#example-use-case)
   - [Features](#features)
@@ -84,7 +82,6 @@ makefake({
 }) // Result (Random):  "Mahmut"
 
 /* There are couple of predefined data model for _source:
-
    makefake.nameSurname: contains name and surname.
    makefake.username: contains random usernames.
    makefake.word: contains english words.
@@ -127,7 +124,6 @@ makefake({
   _source: ['username'],
   _formatter: (data, content) => '@' + data
 }) // Result (Exactly): @username
-
 ```
 
 ### Number
@@ -175,15 +171,80 @@ makefake({
 }) // Result (Exactly): [ 18, 16, 14, 12, 10, 8, 6, 4, 2, 0 ]
 
 /*
-  What is happening here?
-  In 'number' defination _formatter gives 
-  a 'content' argument represents number's parent, in this case 
-  parent is array, and every array has a 'index' param represents 
-  current array index.
+What is happening here?
+In 'number' defination _formatter gives a 'content' argument represents number's parent, in this case parent is array, and every array has a 'index' param represents current array index.
 
-  In 'array' defination _formatter gives a data argument
-  represents array data. We just reversed it.
+In 'array' defination _formatter gives a data argument
+represents array data. We just reversed it.
 */
-
-
 ```
+### Boolean
+Arguments: **_truePossibilityPercent**: number, **_formatter**: function (data, content)<br>
+**_truePossibilityPercent** is number between 0 and 100.
+
+```javascript
+makefake({
+  _type: 'boolean',
+  _truePossibilityPercent: 100
+}) // Result (Exactly): true
+
+makefake({
+  _type: 'boolean',
+  _truePossibilityPercent: 0
+}) // Result (Exactly): false
+
+makefake({
+  _type: 'boolean',
+  _truePossibilityPercent: 49
+}) // Result (Random): true
+```
+
+### Array
+Arguments: **_length**: number, **_content**: object
+```javascript
+makefake({
+  _type: 'array',
+  _length: 10,
+  _content: {
+    _type: 'boolean',
+    _formatter: (data, content) => content.getParam('index') % 2 === 0
+  }
+}) // Result (Exactly) [ true, false, true, false, true, false, true, false, true, false ]
+```
+
+### Object
+Arguments: No argument
+```javascript
+// create car object
+makefake({
+  "year": {
+    _type: 'number',
+    _min: 1990,
+    _max: 2019
+  },
+  "brand": {
+    _type: 'string',
+    _source: ['Ford', 'Audi', 'BMW', 'Ferrari']
+  },
+  "price": {
+    _type: 'number',
+    _min: 5000,
+    _max: 100000
+  },
+  "isExpensive": {
+    _type: 'boolean',
+    _formatter: (data, content) => {
+      return content.getData().price > 40000
+    }
+  }
+}) // Result (Random) { year: 2014, brand: 'BMW', price: 52737, isExpensive: true }
+```
+
+### License
+Copyright 2019 Mahmut Taşkıran
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
