@@ -46,7 +46,7 @@ let userList = makefake({
   }
 });
 ```
-This codes produces an array contain one hundred different user object just like that:
+This codes produces an array contain one hundred different user object like that:
 ```json
 [
   {
@@ -68,7 +68,7 @@ It's just a simple use case. Let's see Features and Documentation to understand 
 
 ## Features
 **Random data creating**<br>
-MakeFake can create any primitive and non-primitive data just like array or object randomly that contains other primitive or non-primitive data types.<br>
+MakeFake can create any primitive and non-primitive data like array or object randomly that contains other primitive or non-primitive data types.<br>
 **Basic data structure**<br>
 Define your data structure as same result object.<br>
 **Custom data formatting**<br>
@@ -106,16 +106,16 @@ makefake({
 }) // Result (Random): "qwekjaskdj" 
 
 // You can set _character to 'a-Z', 'A-Z', '0-9', 'Symbol' 
-// You can set _character to custom characters just like "abcd1234". 
+// You can set _character to custom characters like "abcd1234". 
 
-// You can set _character to custom char code range just like that.
+// You can set _character to custom char code range like that.
 makefake({
   _type: 'string',
   _length: 5,
   _charset: [48, 57]
 }) // Result (Random): 34512
 
-// Or you can set multiple character sets just like that 
+// Or you can set multiple character sets like that 
 makefake({
   _type: 'string',
   _length: 5,
