@@ -2,10 +2,15 @@
 Create data for test, design and other development processes needs data to continue fast.
 
 ## Table of Contents
-1. [Installation](#installation)<br>
-2. [Example use case](#example-use-case)<br>
-3. [Features](#features)<br>
-4. [Documentation](#documentation)<br>
+
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Example use case](#example-use-case)
+  - [Features](#features)
+  - [Documentation](#documentation)
+    - [Data types](#data-types)
+    - [String](#string)
+    - [Number](#number)
 
 ## Installation
 ```
@@ -70,21 +75,34 @@ MakeFake allows intervention to editing data during creating.<br>
 ## Documentation
 ### Data types
 ### String 
-Arguments: _source, _charset, _source, _formatter
+Arguments: **_source**: array, **_charset**: string or array, **_length**: number, **_formatter**: function(data, content)
 ```javascript
 let namesArray = ["Mahmut", "Brain", "Elizabeth"];
 makefake({
   _type: 'string',
   _source: namesArray
-}) 
-// Result:  "Mahmut"
+}) // Result (Random):  "Mahmut"
+
+/* There are couple of predefined data model for _source:
+
+   makefake.nameSurname: contains name and surname.
+   makefake.username: contains random usernames.
+   makefake.word: contains english words.
+   makefake.language: contains languages.
+   makefake.paragraph: contains paragraphs.
+   makefake.sentence: contain sentences.  
+*/
+
+makefake({
+  _type: 'string',
+  _source: makefake.nameSurname
+}) // Result (Random result in makefake.nameSurname array): 'Willie Heppner'
 
 makefake({
   _type: 'string',
   _length: 10,
   _charset: 'a-z'
-}) 
-// Result: "qwekjaskdj" 
+}) // Result (Random): "qwekjaskdj" 
 
 // You can set _character to 'a-Z', 'A-Z', '0-9', 'Symbol' 
 // You can set _character to custom characters just like "abcd1234". 
@@ -94,23 +112,78 @@ makefake({
   _type: 'string',
   _length: 5,
   _charset: [48, 57]
-})
-// Result: 34512
+}) // Result (Random): 34512
 
 // Or you can set multiple character sets just like that 
 makefake({
   _type: 'string',
-  _length: 20,
+  _length: 5,
   _charset: ["customcharacters1234", 'a-Z', [48, 57]]
-})
+}) // Result (Random): Z1ctMs
 
-// use _formatter to edit produced data from MakeFake
+// use _formatter to edit produced data
 makefake({
   _type: 'string',
-  _source: ''
-})
+  _source: ['username'],
+  _formatter: (data, content) => '@' + data
+}) // Result (Exactly): @username
 
 ```
 
 ### Number
-Arguments: _max, _min, _float, _index, _formatter
+Arguments: **_max**: number, **_min**: number, **_float**: boolean, **_index**: boolean, **_formatter**: function(data, content)
+```javascript
+makefake({
+  _type: 'number'
+  // default _max is 100,
+  // default _min is 0,
+}) // Result (Random): 11
+
+makefake({
+  _type: 'number',
+  _min: 2000,
+  _max: 2020,
+}) // Result (Random): 2019
+
+makefake({
+  _type: 'number',
+  _min: 10,
+  _max: 100,
+  _float: true,
+  _formatter: (data, content) => data.toFixed(2)
+}) // Result (Random): 40.39
+
+makefake({
+  _type: 'array',
+  _length: 10,
+  _content: {
+    _type: 'number',
+    _index: true,
+  }
+}) // Result (Exactly): [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+makefake({
+  _type: 'array',
+  _length: 10,
+  _content: {
+    // number defination start
+    _type: 'number',
+    _formatter: (data, content) => content.getParam('index') * 2
+    // number defination end
+  },
+  _formatter: (data, content) => data.reverse()
+}) // Result (Exactly): [ 18, 16, 14, 12, 10, 8, 6, 4, 2, 0 ]
+
+/*
+  What is happening here?
+  In 'number' defination _formatter gives 
+  a 'content' argument represents number's parent, in this case 
+  parent is array, and every array has a 'index' param represents 
+  current array index.
+
+  In 'array' defination _formatter gives a data argument
+  represents array data. We just reversed it.
+*/
+
+
+```
