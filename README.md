@@ -266,7 +266,7 @@ makefake({
   _type: 'photo',
   _width: 500,
   _height: 500
-}) // Result (Random): https://picsum.photos/400/400/?key=0.47288896556640103&random
+}) // Result (Random): https://picsum.photos/500/500/?key=0.47288896556640103&random
 ```
 
 ## License
