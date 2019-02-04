@@ -1,3 +1,4 @@
+
 # MakeFake
 Create data for test, design and other development processes needs data to continue fast.
 
@@ -23,6 +24,8 @@ Let's assume you have a design like below and you wanna create ListView for this
 
 ![N|DesignExample](https://raw.githubusercontent.com/mahmuttaskiran/makefake/master/images/p1.png)
 ```javascript
+import makefake from 'makefake'
+
 let userList = makefake({
   _type: 'array',
   _length: 100,
@@ -79,6 +82,8 @@ MakeFake allows intervention to editing data during creating.<br>
 ### String 
 Arguments: **_source**: array, **_charset**: string or array, **_length**: number, **_formatter**: function(data, content)
 ```javascript
+import makefake from  'makefake'
+
 let namesArray = ["Mahmut", "Brain", "Elizabeth"];
 makefake({
   _type: 'string',
@@ -133,6 +138,8 @@ makefake({
 ### Number
 Arguments: **_max**: number, **_min**: number, **_float**: boolean, **_index**: boolean, **_formatter**: function(data, content)
 ```javascript
+import makefake from  'makefake'
+
 makefake({
   _type: 'number'
   // default _max is 100,
@@ -190,6 +197,8 @@ Arguments: **_truePossibilityPercent**: number, **_formatter**: function (data, 
 **_truePossibilityPercent** is number between 0 and 100.
 
 ```javascript
+import makefake from  'makefake'
+
 makefake({
   _type: 'boolean',
   _truePossibilityPercent: 100
@@ -222,6 +231,8 @@ makefake({
 ### Object
 Arguments: No argument
 ```javascript
+import makefake from  'makefake'
+
 // create car object
 makefake({
   "year": {
@@ -251,6 +262,8 @@ makefake({
 Arguments: **_hue**: color, **_luminosity**: color, **_format**: string, **_alpha**: number<br>
 [See Random Color Documentation](https://github.com/davidmerfield/randomColor)
 ```javascript
+import makefake from  'makefake'
+
 makefake({
   _type: 'color',
   _hue: 'blue',
@@ -262,6 +275,8 @@ makefake({
 Arguments: **_width**: color, **_height**: color<br>
 https://picsum.photos/
 ```javascript
+import makefake from  'makefake'
+
 makefake({
   _type: 'photo',
   _width: 500,
