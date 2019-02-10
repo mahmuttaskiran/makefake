@@ -1,7 +1,7 @@
 const { produce, addProducer } = require("./src/Producer");
 const { createContext } = require("./src/Context");
 
-// producers
+// import producers
 const { stringProducer } = require("./src/producers/StringProducer");
 const { objectProducer } = require("./src/producers/ObjectProducer");
 const { arrayProducer } = require("./src/producers/ArrayProducer");
@@ -24,6 +24,70 @@ function makefake(dataStructure) {
   return produce(dataStructure, createContext());
 }
 
+// producers with function
+makefake.array = function (length, content) {
+  return makefake({
+    _type: 'array',
+    _length: length,
+    _content: content
+  });
+};
+
+makefake.string = function (length, charset) {
+  if (typeof charset === 'undefined') charset = 'a-Z';
+  return makefake({
+    _type: 'string',
+    _length: length,
+    _charset: charset
+  });
+};
+
+makefake.stringFromSource = function (source) {
+  return makefake({
+    _type: 'string',
+    _source: source
+  });
+};
+
+makefake.float = function (max, min) {
+  if (typeof max === 'undefined') max = 100;
+  if (typeof min === 'undefined') min = 0;
+  return makefake({
+    _type: 'number',
+    _float: true,
+    _max: max,
+    _min: min
+  });
+};
+
+makefake.number = function (max, min) {
+  if (typeof max === 'undefined') max = 100;
+  if (typeof min === 'undefined') min = 0;
+  return makefake({
+    _type: 'number',
+    _max: max,
+    _min: min
+  });
+};
+
+makefake.photo = function (width, height) {
+  if (typeof width === 'undefined') width = 400;
+  if (typeof height === 'undefined') height = 400;
+  return makefake({
+    _type: 'photo',
+    _width: width,
+    _height: height
+  });
+};
+
+makefake.boolean = function (truePossibilityPercent) {
+  return makefake({
+    _type:'boolean',
+    _truePossibilityPercent: truePossibilityPercent
+  });
+};
+
+// pre defined sources
 makefake.nameSurname = require("./src/fakesources/FakeUserNames");
 makefake.username = require("./src/fakesources/FakeUserNames");
 makefake.word = require("./src/fakesources/FakeEnglishWords");
