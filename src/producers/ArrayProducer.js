@@ -3,12 +3,6 @@ const { produce } = require("../Producer");
 function arrayProducer(ds, context) {
   var { _length, _content } = ds;
 
-  if (!_length) {
-    throw new Error(
-      "Define array length: _length missing in data structure."
-    );
-  }
-
   if (typeof _length !== 'number') {
     throw new Error("_length have to be a number.");
   }
