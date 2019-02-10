@@ -1,6 +1,4 @@
-const makefake = require("../index");
-const FakeNames = require("../src/fakesources/FakeNames");
-const FakeUserNames = require("../src/fakesources/FakeUserNames");
+const makefake = require('makefake');
 
 const userList = makefake({
   _type: 'array',
@@ -8,7 +6,7 @@ const userList = makefake({
   _content: {
     "name": {
       _type: 'string',
-      _source: FakeNames
+      _source: makefake.nameSurname
     },
     "profilePicture": {
       _type: 'photo'
@@ -19,7 +17,7 @@ const userList = makefake({
     },
     "username": {
       _type: 'string',
-      _source: FakeUserNames,
+      _source: makefake.username,
       _formatter: function (data) {
         return "@" + data;
       }
