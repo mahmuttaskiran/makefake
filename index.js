@@ -33,6 +33,14 @@ makefake.array = function (length, content) {
   });
 };
 
+makefake.randexp = function (pattern, ignoreCase) {
+  return makefake({
+    _type: 'string',
+    _pattern: pattern,
+    _ignoreCase: ignoreCase
+  });
+};
+
 makefake.string = function (length, charset) {
   if (typeof charset === 'undefined') charset = 'a-Z';
   return makefake({

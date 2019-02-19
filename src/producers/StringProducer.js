@@ -1,4 +1,5 @@
 "use strict";
+const RandExp = require('randexp');
 const Charsets = {};
 
 Charsets["0-9"] = [48, 57];
@@ -8,13 +9,16 @@ Charsets["a-Z"] = [97, 122, 65, 90];
 Charsets["Symbol"] = [33, 47, 58, 64, 91, 96];
 
 function stringProducer(ds, context) {
-  const { _source } = ds;
+  const { _source, _pattern, _ignoreCase } = ds;
   // if _source is not defined, produce random string
   var fakeString;
-  if (!_source) {
-    fakeString = randomStringProducer(ds, context);
-  } else {
+  if (_pattern) {
+    var randomExp = new RandExp(_pattern, _ignoreCase);
+    fakeString = randomExp.gen();
+  } else if (_source) {
     fakeString = _source[fr(_source.length -1)];
+  } else {
+    fakeString = randomStringProducer(ds, context);
   }
   return fakeString;
 }

@@ -104,3 +104,13 @@ it('should return paragraph', function () {
   expect(FakeParagraphs).toContain(p);
   console.log(p);
 });
+
+it('should return 5 number', function () {
+  expect.assertions(1);
+  var p = makefake({
+    _type: 'string',
+    _pattern: /[0-9]{5}/
+  });
+  expect(parseInt(p).toString().length).toBe(5);
+  console.log(p);
+});
