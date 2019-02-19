@@ -1,6 +1,6 @@
 {
   "name": "makefake",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Make easier to create data for test, design and other development process need data to continue fast.",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,8 @@
     "url": "https://github.com/mahmuttaskiran/MakeFake/issues"
   },
   "dependencies": {
-    "randomcolor": "^0.5.3"
+    "randomcolor": "^0.5.3",
+    "randexp": "^0.5.3"
   },
   "homepage": "https://github.com/mahmuttaskiran/MakeFake#readme",
   "devDependencies": {
