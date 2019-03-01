@@ -8,6 +8,50 @@ const FUNC = 6;
 const NUM = 7;
 const STR = 8;
 
+var colorFormats = [
+  "rgb",
+  "rgba",
+  "rgbArray",
+  "hsl",
+  "hsla",
+  "hslArray",
+  "hex"
+];
+var colorLuminosities = ["bright", "light", "dark"];
+
+function colorFormatPicker(tokens, values) {
+  for (var i = 0; i < tokens.length; i++) {
+    if (tokens[i] === STR) {
+      if (colorFormats.includes(values[i])) {
+        return values[i];
+      }
+    }
+  }
+}
+
+function colorLuminosityParamPicker(tokens, values) {
+  for (var i = 0; i < tokens.length; i++) {
+    if (tokens[i] === STR) {
+      if (colorLuminosities.includes(values[i])) {
+        return values[i];
+      }
+    }
+  }
+}
+
+function colorHueParamPicker(tokens, values) {
+  for (var i = 0; i < tokens.length; i++) {
+    if (tokens[i] === STR) {
+      if (
+        !colorFormats.includes(values[i]) &&
+        !colorLuminosities.includes(values[i])
+      ) {
+        return values[i];
+      }
+    }
+  }
+}
+
 const truePossibilityPercentCalculator = function(tokens, values) {
   // if first value is true, _truePossibilityPercent is given value
   // for example, if input is that "[true, 20]" then _truePossibilityPercent is 20
@@ -135,26 +179,45 @@ const numberStructure = [
   }
 ];
 
-const randomValueFromArrayStructure = [
+const inArrayStructureParam = {
+  required: false,
+  params: [FUNC, ARR],
+  result: {
+    _type: "inArray",
+    _source: function(tokens, values) {
+      for (var i = 0; i < tokens.length; i++) {
+        if (tokens[i] === ARR) {
+          return values[i];
+        }
+      }
+    },
+    _count: function(tokens, values) {
+      for (var i = 0; i < tokens.length; i++) {
+        if (tokens[i] === NUM) {
+          return values[i];
+        }
+      }
+    },
+    _formatter: [FUNC]
+  }
+};
+
+const inArrayStructure = [
   {
     required: true,
-    params: [ARR],
+    params: [ARR, NUM],
     result: {
-      _type: "string",
-      _source: [ARR]
+      _type: "inArray",
+      _source: [ARR],
+      _count: function(tokens) {
+        if (tokens[0] === ARR) {
+          return 1;
+        }
+      }
     }
   },
-  {
-    required: true,
-    params: [FUNC],
-    result: {
-      _type: "string",
-      _source: function(tokens, values) {
-        return values[0];
-      },
-      _formatter: [FUNC]
-    }
-  }
+  inArrayStructureParam,
+  inArrayStructureParam
 ];
 
 const arrayStructure = [
@@ -212,19 +275,47 @@ const formatterStructure = [
     required: true,
     params: [FUNC],
     result: {
-      _type: "boolean",
-      _formatter: [FUNC]
+      _type: "formatter",
+      _func: [FUNC]
     }
   }
+];
+
+const colorStructureParam = {
+  required: false,
+  params: [FUNC, STR, NUM],
+  result: {
+    _type: "color",
+    _formatter: [FUNC],
+    _alpha: [NUM],
+    _hue: colorHueParamPicker,
+    _luminosity: colorLuminosityParamPicker,
+    _format: colorFormatPicker
+  }
+};
+const colorStructure = [
+  {
+    required: true,
+    params: [COLOR],
+    result: {
+      _type: "color"
+    }
+  },
+  colorStructureParam,
+  colorStructureParam,
+  colorStructureParam,
+  colorStructureParam,
+  colorStructureParam
 ];
 
 const structures = [
   booleanStructure,
   numberStructure,
-  randomValueFromArrayStructure,
+  inArrayStructure,
   arrayStructure,
   stringStructure,
-  formatterStructure
+  formatterStructure,
+  colorStructure
 ];
 
 const getToken = function(value) {
@@ -252,6 +343,7 @@ const getToken = function(value) {
 
 const isMatched = function(tokens, values, structure) {
   var lastMatchedStructure = false;
+  var matchedTokenLength = 0;
   for (var i = 0; i < tokens.length; i++) {
     const token = tokens[i];
     const struct = structure[i];
@@ -272,12 +364,19 @@ const isMatched = function(tokens, values, structure) {
         }
       }
     }
+    if (matched) {
+      matchedTokenLength++;
+    }
     lastMatchedStructure = struct;
   }
-  return lastMatchedStructure;
+  if (matchedTokenLength === tokens.length) {
+    return lastMatchedStructure;
+  }
+  return false;
 };
 
 const toStructure = function(tokens, values, struct) {
+  if (!struct || !struct.result) return;
   const result = {};
   const _struct = struct.result;
   const _keys = Object.keys(_struct);
@@ -289,7 +388,10 @@ const toStructure = function(tokens, values, struct) {
         result[_keys[i]] = values[tokenIndex];
       }
     } else if (typeof content === "function") {
-      result[_keys[i]] = content(tokens, values);
+      const funcResult = content(tokens, values);
+      if (funcResult) {
+        result[_keys[i]] = funcResult;
+      }
     } else {
       result[_keys[i]] = _struct[_keys[i]];
     }
