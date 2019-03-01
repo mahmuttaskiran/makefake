@@ -25,18 +25,13 @@ function stringProducer(ds, context) {
 
 function randomStringProducer(ds, context) {
   var { _length, _charset } = ds;
-
   // default length is 8
   if (!_length) _length = 8;
-
   var str = "";
-
   // produce random str for defined charset
-
   if (!_charset) {
     _charset = "a-z";
   }
-
   if (typeof _charset === "string") {
     if (
       _charset === "a-z" ||
@@ -48,7 +43,6 @@ function randomStringProducer(ds, context) {
       _charset = Charsets[_charset];
     }
   }
-
   if (Array.isArray(_charset)) {
     // check is single array just like [0, 100, 122, 140]
     var singleArray = true;
@@ -58,7 +52,6 @@ function randomStringProducer(ds, context) {
         break;
       }
     }
-
     // if charset is just like that ["adasd123", [1, 100], 'a-Z']
     if (!singleArray) {
       while (str.length < _length) {
@@ -70,7 +63,6 @@ function randomStringProducer(ds, context) {
       return str;
     }
   }
-
   if (typeof _charset === "string") {
     while (str.length < _length) {
       str += _charset[fr(_charset.length -1)];
@@ -111,7 +103,6 @@ function randomStringProducer(ds, context) {
       throw new Error("Unsupported charset: " + JSON.stringify(_charset));
     }
   }
-
   return str;
 }
 

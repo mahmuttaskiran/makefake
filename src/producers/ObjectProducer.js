@@ -1,5 +1,5 @@
 const { produce } = require("../Producer");
-
+const parameterTokenizer = require("../ParameterTokenizer.js");
 function objectProducer(ds, context, objRef) {
   // push object content
   var content = context.pushContent("object");
@@ -12,6 +12,9 @@ function objectProducer(ds, context, objRef) {
   var keys = Object.keys(ds);
   for (var i = 0; i < keys.length; i++) {
     var value = ds[keys[i]];
+    if (Array.isArray(value) || value instanceof RegExp) {
+      value = parameterTokenizer(value);
+    }
     if (!value._type) {
       // default value
       obj[keys[i]] = value;
