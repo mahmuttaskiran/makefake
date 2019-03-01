@@ -96,7 +96,7 @@ makefake.boolean = function (truePossibilityPercent) {
 };
 
 // pre defined sources
-makefake.nameSurname = require("./src/fakesources/FakeUserNames");
+makefake.nameSurname = require("./src/fakesources/FakeNames");
 makefake.username = require("./src/fakesources/FakeUserNames");
 makefake.word = require("./src/fakesources/FakeEnglishWords");
 makefake.langueage = require("./src/fakesources/FakeLanguages");
