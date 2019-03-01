@@ -17,7 +17,6 @@ addProducer("number", numberProducer);
 addProducer("array", arrayProducer);
 addProducer("boolean", booleanProducer);
 addProducer("color", colorProducer);
-addProducer("photo", picsumPhotoProducer);
 
 // make fake data and play with it :)
 function makefake(dataStructure) {
