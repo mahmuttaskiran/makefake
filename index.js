@@ -9,6 +9,7 @@ const { arrayProducer } = require("./src/producers/ArrayProducer");
 const { booleanProducer } = require("./src/producers/BooleanProducer");
 const { numberProducer } = require("./src/producers/NumberProducer");
 const { colorProducer } = require("./src/producers/ColorProducer");
+const { randomInArrayProducer } = require("./src/producers/RandomInArrayProducer");
 
 // add producers
 addProducer("string", stringProducer);
@@ -17,6 +18,7 @@ addProducer("number", numberProducer);
 addProducer("array", arrayProducer);
 addProducer("boolean", booleanProducer);
 addProducer("color", colorProducer);
+addProducer("inArray", randomInArrayProducer);
 
 // make fake data and play with it :)
 function makefake(dataStructure) {

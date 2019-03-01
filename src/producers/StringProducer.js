@@ -16,6 +16,7 @@ function stringProducer(ds, context) {
     var randomExp = new RandExp(_pattern, _ignoreCase);
     fakeString = randomExp.gen();
   } else if (_source) {
+    // @deprecated. see {randomInArrayProducer}
     fakeString = _source[fr(_source.length -1)];
   } else {
     fakeString = randomStringProducer(ds, context);
