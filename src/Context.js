@@ -57,10 +57,14 @@ function createContext() {
     }
     return null;
   }
+  function getRootContent() {
+    return contents[0];
+  }
   return {
     pushContent: pushContent,
     getCurrentContent: getCurrentContent,
-    getLastContentWithType: getLastContentWithType
+    getLastContentWithType: getLastContentWithType,
+    getRootContent: getRootContent
   };
 }
 

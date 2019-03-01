@@ -7,26 +7,34 @@ function addProducer(type, producer) {
   producers[type] = producer;
 }
 
-function produce(dataStructure, context) {
-  if (dataStructure === null) {
+function produce(ds, context, objRef) {
+  if (ds === null) {
     return null;
   }
-  if (dataStructure === undefined) {
+  if (ds === undefined) {
     return undefined;
   }
-  if (!dataStructure._type && Object.keys(dataStructure).length === 0) {
+  if (!ds._type && Object.keys(ds).length === 0) {
     return {};
   }
   // default dataStructure type is object
-  var type = dataStructure._type ? dataStructure._type : "object";
-  var fakeData = producers[type](dataStructure, context);
-  if (dataStructure._formatter) {
-    if (typeof dataStructure._formatter !== "function") {
+  var type = ds._type ? ds._type : "object";
+  var ref = {data: null};
+  var produced = producers[type](ds, context, objRef || ref);
+  if (ref.data === null) ref.data = produced;
+  if (ds._formatter) {
+    if (typeof ds._formatter !== "function") {
       throw new Error("_formatter is not a function");
     }
-    return dataStructure._formatter(fakeData, context.getCurrentContent());
+    var rootContent =context.getRootContent();
+    if (rootContent.isObject() || rootContent.isArray()) {
+      ds._formatter = ds._formatter.bind(
+        context.getRootContent().getData()
+      );
+    }
+    return ds._formatter(ref.data);
   }
-  return fakeData;
+  return ref.data;
 }
 
 module.exports = {

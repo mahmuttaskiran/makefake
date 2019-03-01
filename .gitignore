@@ -5,6 +5,9 @@
 /tmp
 /out-tsc
 
+# ignore features.js file
+src/target.js
+
 # Runtime data
 pids
 *.pid

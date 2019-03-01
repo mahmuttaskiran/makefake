@@ -101,4 +101,3 @@ it('int test for _float', function () {
     expect(fakeData).toBeLessThan(100);
   }
 });
-
