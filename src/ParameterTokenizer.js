@@ -276,7 +276,7 @@ const formatterStructure = [
     params: [FUNC],
     result: {
       _type: "formatter",
-      _func: [FUNC]
+      _formatter: [FUNC]
     }
   }
 ];
