@@ -19,18 +19,16 @@ function produce(ds, context, objRef) {
   }
   // default dataStructure type is object
   var type = ds._type ? ds._type : "object";
-  var ref = {data: null};
+  var ref = { data: null };
   var produced = producers[type](ds, context, objRef || ref);
   if (ref.data === null) ref.data = produced;
   if (ds._formatter) {
     if (typeof ds._formatter !== "function") {
       throw new Error("_formatter is not a function");
     }
-    var rootContent =context.getRootContent();
+    var rootContent = context.getRootContent();
     if (rootContent.isObject() || rootContent.isArray()) {
-      ds._formatter = ds._formatter.bind(
-        context.getRootContent().getData()
-      );
+      ds._formatter = ds._formatter.bind(rootContent.getData());
     }
     return ds._formatter(ref.data);
   }
