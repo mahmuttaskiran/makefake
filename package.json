@@ -1,6 +1,6 @@
 {
   "name": "makefake",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Make easier to create data for test, design and other development process need data to continue fast.",
   "main": "index.js",
   "scripts": {
