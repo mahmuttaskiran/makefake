@@ -1,4 +1,4 @@
-function formatterProducer(ds, context) {
+function formatterProducer() {
   return null;
 }
 
